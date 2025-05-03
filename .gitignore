@@ -1,3 +1,6 @@
 .idea/
 .vscode/
 test.txt
+volumes/
+.env
+node_modules/

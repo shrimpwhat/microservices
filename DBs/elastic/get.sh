@@ -1,1 +1,7 @@
-curl -X GET "http://localhost:9200/lessons_materials/_doc/2?pretty"
+curl -X GET "http://localhost:9200/lessons/_search?pretty" -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "match_all": {}
+  },
+  "size": 100
+}'

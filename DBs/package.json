@@ -1,0 +1,23 @@
+{
+  "name": "generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node generate.js",
+    "dump": "docker exec postgres pg_dump -U postgres postgres > postgres/dump.sql"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.10.0",
+  "dependencies": {
+    "@elastic/elasticsearch": "^8.17.1",
+    "dotenv": "^16.5.0",
+    "mongodb": "^6.16.0",
+    "neo4j-driver": "^5.28.1",
+    "pg": "^8.15.6",
+    "redis": "^4.7.0"
+  }
+}
