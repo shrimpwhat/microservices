@@ -5,14 +5,14 @@
   "scripts": {
     "dev": "bun run --watch index.ts"
   },
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
     "@types/jsonwebtoken": "^9.0.8",
     "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.12"
   }
 }

@@ -30,11 +30,6 @@ const isLoggedIn = (req: Request) => {
   }
 };
 
-const getRoute = (req: Request) => {
-  const url = new URL(req.url);
-  return url.pathname;
-};
-
 const handleLogin = async (req: Request) => {
   const body = await req.formData();
 
@@ -58,18 +53,9 @@ const handleLogin = async (req: Request) => {
 };
 
 Bun.serve({
-  async fetch(req) {
-    const route = getRoute(req);
-
-    if (req.method === "POST" && route === "/login") {
-      return handleLogin(req);
-    }
-
-    if (!isLoggedIn(req)) {
-      return new Response("Unauthorized", { status: 401 });
-    }
-
-    return new Response("OK");
+  routes: {
+    "/login": {
+      POST: handleLogin,
+    },
   },
-  port: 3000,
 });
