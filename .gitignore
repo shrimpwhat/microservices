@@ -4,3 +4,4 @@ volumes/
 .env
 node_modules/
 gateway/dist
+.DS_Store
