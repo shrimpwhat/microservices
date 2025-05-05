@@ -13,10 +13,7 @@ const postgres = new Postgres({
 const redisClient = redis.createClient({
   url: "redis://localhost:6379",
 });
-const neo4jDriver = neo4j.driver(
-  "bolt://localhost:7687",
-  neo4j.auth.basic("neo4j", "12345678")
-);
+const neo4jDriver = neo4j.driver("bolt://localhost:7687");
 const elasticClient = new ElasticSearch({
   node: "http://localhost:9200",
 });

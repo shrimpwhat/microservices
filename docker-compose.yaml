@@ -79,11 +79,75 @@ services:
       - redis_data:/data
     networks:
       - db-network
+    
+  gateway:
+      build:
+        context: ./gateway
+        dockerfile: Dockerfile
+      container_name: gateway
+      env_file:
+        - ./gateway/.env
+      ports:
+        - "3000:3000" 
+      depends_on:
+        - app1
+        - app2
+        - app3
+      networks:
+        - db-network
+  
+  app1:
+    build:
+      context: ./apps
+      dockerfile: Dockerfile
+    container_name: app1
+    environment:
+      - PORT=3001
+    command: node 1.js
+    depends_on:
+      - postgres
+      - redis
+      - neo4j
+      - elasticsearch
+    networks:
+      - db-network
+  
+  app2:
+    build:
+      context: ./apps
+      dockerfile: Dockerfile
+    container_name: app2
+    environment:
+      - PORT=3002
+    command: node 2.js
+    depends_on:
+      - postgres
+      - redis
+      - neo4j
+      - elasticsearch
+    networks:
+      - db-network
+  
+  app3:
+    build:
+      context: ./apps
+      dockerfile: Dockerfile
+    container_name: app3
+    environment:
+      - PORT=3003
+    command: node 3.js
+    depends_on:
+      - postgres
+      - redis
+      - neo4j
+      - elasticsearch
+    networks:
+      - db-network
 
 networks:
   db-network:
     driver: bridge
-
+    
 volumes:
   postgres_data:
   mongo_data:

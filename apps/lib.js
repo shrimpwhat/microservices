@@ -4,22 +4,19 @@ import { Client as Elastic } from "@elastic/elasticsearch";
 import { Client as Postgres } from "pg";
 
 const redisClient = redis.createClient({
-  url: "redis://localhost:6379",
+  url: "redis://redis:6379",
 });
 
-const neo4jDriver = neo4j.driver(
-  "bolt://localhost:7687",
-  neo4j.auth.basic("neo4j", "12345678")
-);
+const neo4jDriver = neo4j.driver("bolt://neo4j:7687");
 const neo4jSession = neo4jDriver.session();
 
 const elasticClient = new Elastic({
-  node: "http://localhost:9200",
+  node: "http://elasticsearch:9200",
 });
 
 const postgres = new Postgres({
   user: "postgres",
-  host: "localhost",
+  host: "postgres",
   database: "postgres",
   port: 5432,
 });
@@ -54,7 +51,7 @@ export async function getStudentById(id, percent = null, attendance = null) {
   }
 
   if (attendance !== null) {
-    res.attended_hours = (attendance * 2).toString();
+    res.attended_hours = attendance * 2;
   }
 
   return res;

@@ -92,7 +92,6 @@ app.get("/", async (req, res) => {
 
   const result = [];
   for (const [studentId, scheduleCount] of Object.entries(scheduleByStudent)) {
-    // if (attendanceData[studentId] === undefined) continue;
     const actualAttendance = attendanceData[studentId] || 0;
     const percent = (actualAttendance / scheduleCount) * 100;
     result.push({ studentId, percent });
@@ -110,5 +109,5 @@ app.get("/", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`App 1 is running on http://localhost:${PORT}`);
+  console.log(`App 1 is running on ${PORT}`);
 });

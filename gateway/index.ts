@@ -52,10 +52,35 @@ const handleLogin = async (req: Request) => {
   }
 };
 
+const handleApp = (app: string) => async (req: Request) => {
+  if (!isLoggedIn(req)) {
+    return new Response("Unauthorized", { status: 401 });
+  }
+
+  const url = new URL(req.url);
+  const queryParams = url.search;
+
+  const result = await fetch(`http://${app}${queryParams}`);
+
+  const data = await result.json();
+  return Response.json(data, {
+    status: result.status,
+  });
+};
+
 Bun.serve({
   routes: {
     "/login": {
       POST: handleLogin,
+    },
+    "/1": {
+      GET: handleApp("app1:3001"),
+    },
+    "/2": {
+      GET: handleApp("app2:3002"),
+    },
+    "/3": {
+      GET: handleApp("app3:3003"),
     },
   },
 });

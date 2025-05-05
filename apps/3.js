@@ -95,5 +95,5 @@ app.get("/", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`App 3 is running on http://localhost:${PORT}`);
+  console.log(`App 3 is running on ${PORT}`);
 });
